@@ -1864,6 +1864,7 @@ final public class InAppWebView extends InputAwareWebView {
             "})();", new ValueCallback<String>() {
       @Override
       public void onReceiveValue(String value) {
+       try{
         if (floatingContextMenu != null) {
           if (value != null) {
             int x = contextMenuPoint.x;
@@ -1875,7 +1876,11 @@ final public class InAppWebView extends InputAwareWebView {
             floatingContextMenu.animate().alpha(1f).setDuration(100).setListener(null);
           }
         }
-      }
+      } catch (NumberFormatException e) {
+        floatingContextMenu.setVisibility(View.VISIBLE);
+        floatingContextMenu.animate().alpha(1f).setDuration(100).setListener(null);
+     }
+    }
     });
   }
 
